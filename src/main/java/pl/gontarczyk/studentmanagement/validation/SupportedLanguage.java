@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SupportedLanguage {
 
-    String message() default "One or more of the listed languages are not supported or none has been placed!";
+    String message() default "Language is not supported!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
