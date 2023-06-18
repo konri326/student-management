@@ -2,7 +2,7 @@ package pl.gontarczyk.studentmanagement.teacher.model;
 
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
-import pl.gontarczyk.studentmanagement.validation.SupportedLanguage;
+import pl.gontarczyk.studentmanagement.validation.SupportedLanguages;
 
 import java.util.Set;
 
@@ -19,6 +19,6 @@ public class TeacherDto {
     @Pattern(regexp = "[A-Za-z]{3,}", message = "Invalid last name!")
     private String lastName;
 
-    @SupportedLanguage
+    @SupportedLanguages
     private Set<String> languages;
 }
