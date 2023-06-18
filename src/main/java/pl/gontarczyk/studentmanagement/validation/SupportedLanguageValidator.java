@@ -4,17 +4,12 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import pl.gontarczyk.studentmanagement.common.Language;
 
-import java.util.Set;
+import java.util.Arrays;
 
-public class SupportedLanguageValidator implements ConstraintValidator<SupportedLanguage, Set<String>> {
+public class SupportedLanguageValidator implements ConstraintValidator<SupportedLanguage, String> {
 
     @Override
-    public boolean isValid(Set<String> languages, ConstraintValidatorContext constraintValidatorContext) {
-        if (languages != null && languages.size() >= 1) {
-            return languages.stream()
-                    .allMatch(Language::isExists);
-        } else {
-            return false;
-        }
+    public boolean isValid(String inputLanguage, ConstraintValidatorContext constraintValidatorContext) {
+        return Language.isExists(inputLanguage);
     }
 }
