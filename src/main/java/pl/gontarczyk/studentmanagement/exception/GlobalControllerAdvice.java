@@ -26,4 +26,10 @@ public class GlobalControllerAdvice {
     public ExceptionDto handlerEntityNotFoundException(EntityNotFoundException ex) {
         return new ExceptionDto(ex.getMessage());
     }
+
+    @ExceptionHandler(IncorrectConnectionOfObjectsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDto handlerIncorrectConnectionOfObjectsException(IncorrectConnectionOfObjectsException ex) {
+        return new ExceptionDto(ex.getMessage());
+    }
 }
