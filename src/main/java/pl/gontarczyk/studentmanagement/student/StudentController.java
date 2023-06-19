@@ -1,6 +1,7 @@
 package pl.gontarczyk.studentmanagement.student;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,12 @@ public class StudentController {
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<StudentDto> save(@RequestBody @Valid StudentDto studentDto) {
-        Student student = studentService.save(studentMapper.toEntity(studentDto));
+    @PostMapping(params = "teacherId")
+    public ResponseEntity<StudentDto> save(
+            @RequestBody @Valid StudentDto studentDto,
+            @RequestParam("teacherId") int teacherId
+    ) {
+        Student student = studentService.save(studentMapper.toEntity(studentDto), teacherId);
         StudentDto returnedStudent = studentMapper.toDto(student);
         return new ResponseEntity<>(returnedStudent, HttpStatus.CREATED);
     }

@@ -3,6 +3,7 @@ package pl.gontarczyk.studentmanagement.student.model;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.gontarczyk.studentmanagement.common.Language;
+import pl.gontarczyk.studentmanagement.teacher.model.Teacher;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +22,9 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     private Language language;
+
+    @ManyToOne
+    private Teacher teacher;
 
     private boolean active;
 }
