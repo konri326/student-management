@@ -1,5 +1,6 @@
 package pl.gontarczyk.studentmanagement.exception;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,6 +31,12 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(IncorrectConnectionOfObjectsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionDto handlerIncorrectConnectionOfObjectsException(IncorrectConnectionOfObjectsException ex) {
+        return new ExceptionDto(ex.getMessage());
+    }
+
+    @ExceptionHandler(EntityExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionDto handlerEntityExistsException(EntityExistsException ex) {
         return new ExceptionDto(ex.getMessage());
     }
 }

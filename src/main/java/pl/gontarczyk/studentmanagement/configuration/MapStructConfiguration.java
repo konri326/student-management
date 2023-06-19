@@ -2,6 +2,8 @@ package pl.gontarczyk.studentmanagement.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.gontarczyk.studentmanagement.lesson.mapper.LessonMapper;
+import pl.gontarczyk.studentmanagement.lesson.mapper.LessonMapperImpl;
 import pl.gontarczyk.studentmanagement.student.mapper.StudentMapper;
 import pl.gontarczyk.studentmanagement.student.mapper.StudentMapperImpl;
 import pl.gontarczyk.studentmanagement.teacher.mapper.TeacherMapper;
@@ -18,5 +20,10 @@ public class MapStructConfiguration {
     @Bean
     public StudentMapper studentMapper() {
         return new StudentMapperImpl();
+    }
+
+    @Bean
+    public LessonMapper lessonMapper() {
+        return new LessonMapperImpl();
     }
 }

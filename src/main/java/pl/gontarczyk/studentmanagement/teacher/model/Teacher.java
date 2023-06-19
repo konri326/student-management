@@ -3,6 +3,7 @@ package pl.gontarczyk.studentmanagement.teacher.model;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.gontarczyk.studentmanagement.common.Language;
+import pl.gontarczyk.studentmanagement.lesson.model.Lesson;
 import pl.gontarczyk.studentmanagement.student.model.Student;
 
 import java.util.Set;
@@ -31,9 +32,8 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     private Set<Student> students;
 
-    private boolean active;
+    @OneToMany(mappedBy = "teacher")
+    private Set<Lesson> lessons;
 
-    public String fullName() {
-        return getFirstName() + " " + getLastName();
-    }
+    private boolean active;
 }
