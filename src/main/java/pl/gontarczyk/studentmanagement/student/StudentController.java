@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.gontarczyk.studentmanagement.student.mapper.StudentMapper;
 import pl.gontarczyk.studentmanagement.student.model.Student;
 import pl.gontarczyk.studentmanagement.student.model.StudentDto;
+import pl.gontarczyk.studentmanagement.student.model.StudentViewDto;
 
 import java.util.List;
 
@@ -29,18 +30,18 @@ public class StudentController {
     }
 
     @PostMapping(params = "teacherId")
-    public ResponseEntity<StudentDto> save(
+    public ResponseEntity<StudentViewDto> save(
             @RequestBody @Valid StudentDto studentDto,
             @RequestParam("teacherId") int teacherId
     ) {
         Student student = studentService.save(studentMapper.toEntity(studentDto), teacherId);
-        StudentDto returnedStudent = studentMapper.toDto(student);
+        StudentViewDto returnedStudent = studentMapper.toViewDto(student);
         return new ResponseEntity<>(returnedStudent, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentDto> findById(@PathVariable("id") int id) {
-        StudentDto returnedStudent = studentMapper.toDto(studentService.findById(id));
+    public ResponseEntity<StudentViewDto> findById(@PathVariable("id") int id) {
+        StudentViewDto returnedStudent = studentMapper.toViewDto(studentService.findById(id));
         return new ResponseEntity<>(returnedStudent, HttpStatus.OK);
     }
 
