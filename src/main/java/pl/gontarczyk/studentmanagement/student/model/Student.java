@@ -3,7 +3,10 @@ package pl.gontarczyk.studentmanagement.student.model;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.gontarczyk.studentmanagement.common.Language;
+import pl.gontarczyk.studentmanagement.lesson.model.Lesson;
 import pl.gontarczyk.studentmanagement.teacher.model.Teacher;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +28,9 @@ public class Student {
 
     @ManyToOne
     private Teacher teacher;
+
+    @OneToMany(mappedBy = "student")
+    private Set<Lesson> lessons;
 
     private boolean active;
 }
