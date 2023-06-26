@@ -29,7 +29,7 @@ public class TeacherService {
                 .orElseThrow(() -> new EntityNotFoundException("Teacher not found!"));
     }
 
-    public Teacher findByIdAndActive(int id) {
+    public Teacher findActiveById(int id) {
         return teacherRepository.findByIdAndActiveTrue(id)
                 .orElseThrow(() -> new EntityNotFoundException("Teacher not found or not available!"));
     }
