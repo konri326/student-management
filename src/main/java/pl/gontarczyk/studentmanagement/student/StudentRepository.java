@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
+    Optional<Student> findByIdAndActiveTrue(Integer id);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    Optional<Student> findWithLockingById(Integer id);
+    Optional<Student> findWithLockingByIdAndActiveTrue(Integer id);
 }
