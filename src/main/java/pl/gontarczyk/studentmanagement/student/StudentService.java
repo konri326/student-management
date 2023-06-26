@@ -24,11 +24,11 @@ public class StudentService {
     }
 
     public Student save(Student student, int teacherId) {
-        Teacher teacher = teacherService.findByIdAndActive(teacherId);
+        Teacher teacher = teacherService.findActiveById(teacherId);
         if (!teacher.getLanguages().contains(student.getLanguage())) {
             throw new IncorrectConnectionOfObjectsException("Teacher does not know this language!");
         }
-        student.setTeacher(teacherService.findById(teacherId));
+        student.setTeacher(teacher);
         student.setActive(true);
         return studentRepository.save(student);
     }
@@ -38,9 +38,14 @@ public class StudentService {
                 .orElseThrow(() -> new EntityNotFoundException("Student not found!"));
     }
 
+    public Student findActiveById(int id) {
+        return studentRepository.findByIdAndActiveTrue(id)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found or not available!"));
+    }
+
     public Student findWithLockingById(int id) {
-        return studentRepository.findWithLockingById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Student not found!"));
+        return studentRepository.findWithLockingByIdAndActiveTrue(id)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found or not available!"));
     }
 
     @Transactional
