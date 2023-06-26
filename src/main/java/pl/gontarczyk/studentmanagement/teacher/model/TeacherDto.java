@@ -21,4 +21,6 @@ public class TeacherDto {
 
     @SupportedLanguages
     private Set<String> languages;
+
+    private boolean active;
 }
